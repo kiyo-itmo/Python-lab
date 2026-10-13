@@ -30,6 +30,7 @@ def animate():
     for _ in range(5):              # 5 циклов
         for color in colors:
             os.system("cls" if os.name == "nt" else "clear")
+            print(CSI + "H", end="")
             draw_tree(SIZE, color)
             time.sleep(0.5)
 
