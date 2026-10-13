@@ -21,15 +21,16 @@ def make_pattern(width):
     return [full, center, center, full, two, two, full]
 
 
-def draw_pattern(width=17, count_x=4):
+def draw_pattern(width=17, count_x=4, count_y=3):
     """Рисует узор: count_x раз вбок, count_y раз вниз."""
     pattern = make_pattern(width)
     
-    for line in pattern:
-        print(line * count_x)
+    for _ in range(count_y):
+        for line in pattern:
+            print(line * count_x)
 
 
 if __name__ == "__main__":
-    draw_pattern(width=25, count_x=1)
+    draw_pattern(width=25, count_x=1, count_y =0)
 
 
