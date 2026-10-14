@@ -1,9 +1,11 @@
-BLOCK = "#"
 
-
+WHITE=  "\x1b[107m" # белый фон
+RESET= "\x1b[0m"   # сброс цвета
+BLOCK = WHITE + " "*2 + RESET  # блок белого цвет
+SPACE =" "*2
 def make_row(width, positions):
     """Строка из пробелов с блоками в заданных позициях."""
-    row = [" "] * width
+    row = [SPACE] * width
     for p in positions:
         row[p] = BLOCK
     return "".join(row)
@@ -27,10 +29,11 @@ def draw_pattern(width=17, count_x=4, count_y=3):
     
     for _ in range(count_y):
         for line in pattern:
-            print(line * count_x)
+            print(" ".join([line] * count_x))
+        print()
 
 
 if __name__ == "__main__":
-    draw_pattern(width=25, count_x=1, count_y =0)
+    draw_pattern(width=25, count_x=2, count_y =2)
 
 
