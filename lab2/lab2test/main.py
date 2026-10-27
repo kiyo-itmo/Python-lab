@@ -1,0 +1,7 @@
+coffe_csv = open("coffe_sales.csv")
+print(coffe_csv)
+data = coffe_csv.readlines()
+print(type(data))
+print(len(data))
+print(data)
+coffe_csv.close()

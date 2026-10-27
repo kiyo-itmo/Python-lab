@@ -34,6 +34,6 @@ def draw_pattern(width=17, count_x=4, count_y=3):
 
 
 if __name__ == "__main__":
-    draw_pattern(width=25, count_x=2, count_y =2)
+    draw_pattern(width=25, count_x=1, count_y =1)
 
 
