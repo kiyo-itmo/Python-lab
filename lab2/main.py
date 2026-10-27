@@ -65,6 +65,7 @@ def write_references(books):
 
     if count != 20:
         print("Предупреждение: найдено менее 20 корректных записей")
+
 if __name__ == "__main__":
     with open('books-en.csv', encoding='cp1251') as f:
         reader = csv.reader(f, delimiter=';')
