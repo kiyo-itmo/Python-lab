@@ -1,0 +1,261 @@
+import tkinter as tk
+root = tk.Tk() # tao cua so chinh
+root.title("My first app") # dat ten cua so
+root.geometry("400x300") # dat kich thuong rongxcao , don vi pixel
+
+''' 
+# tk.label tao tp hien chu / root chi cua so label thuoc/ text nd hien thi
+label = tk.Label(root, text="Hello Python!") 
+label.pack() # dua label vao bo cuc cua so
+'''
+# hoac
+label = tk.Label(
+    root,
+    text="Hello python!",
+    font=("Arial", 20), # pady=20 khoang cach tren duoi
+    fg='blue', #mau chu
+    bg = 'while' # mau nen
+)
+
+#Tao nut bang Button
+def say_hello():
+    print("hello")
+
+button = tk.Button(
+    root,
+    text="Click me",
+    command =say_hello # tranh say_hello() 
+)
+button.pack()
+say_hello → Truyền hàm cho Tkinter, chỉ chạy khi nhấn nút.
+say_hello() → Gọi hàm ngay khi tạo Button.
+
+
+#nhap du lieu bang Entry
+entry = tk.Entry(root) # tao o nhap
+entry.pack()
+def show_name():
+    name= entry.get() #lay vb dang nhap
+    print(name)
+button = tk.Button(
+    root,
+    tect="Show Name",
+    command=show_name
+)
+# entry.get() layvb dang nhap
+# entry.delete(0, tk.END) xoa toan bo nd o nhap
+# entry.insert(0, "HEllo") chen chu vao dau o nhap
+
+# 3 cach sap xep pho bien tron Tkinter
+#label.pack() xep tu dong
+# label.grid(row=0, column=1) hang 0, cot 1
+# label.place(x=50, y=100) vitri x=50, y=100  
+# ko dung pack() va grid()    cung luc cho cac widget(tien ich) co chung 1 widhet cha
+
+root.mainloop() # giu cua so hoat dong va xu ly su kien, ( thieu ko hoat dong)
+
+Bài thực hành 1
+Bây giờ bạn hãy tự viết một chương trình có:
+1. Cửa sổ kích thước 400x300, tiêu đề "My App".
+2. Một Label hiển thị "Welcome to Tkinter".
+3. Một Button có chữ "Click Me".
+4. Khi nhấn nút, Terminal in ra "Hello World".
+Gợi ý: Bạn chỉ cần sử dụng Tk(), Label(), Button(), pack() và mainloop().
+import tkinter as tk
+root =tk.Tk()
+root.title("My app")
+root.geometry("400x300")
+
+label=tk.Label(root, text= "Welcome to Tkinter")
+def click():
+    print("Hello World")
+
+button= tk.Button(
+    root,
+    text= "Click Me",
+    command= click
+)
+thieu
+label.pack() → Đưa Label lên giao diện.
+button.pack() → Đưa Button lên giao diện.
+root.mainloop() → Duy trì cửa sổ và xử lý thao tác người dùng.
+
+Bài thực hành 2
+Hãy tự tạo chương trình:
+1. Cửa sổ 400x300.
+2. Một Label hiển thị "Enter your name:".
+3. Một Entry để nhập tên.
+4. Một Button có chữ "Say Hello".
+5. Khi nhấn Button, Terminal in ra Hello, Minh nếu người dùng nhập Minh.
+
+root =tk.Tk()
+root.title("My app")
+root.geometry("400x300")
+
+entry= tk.Entry(root)
+
+label= tk.Label(root, text="Enter your name:")
+def say_hello():
+    name= entry.get()
+    print("Hello,", name)
+
+button= tk.Button(
+    root,
+    text= "nhap ten",
+    command= say_hello
+)
+label.pack()  can theo thu tu 
+entry.pack()
+button.pack()
+root.mainloop()
+config() dùng để thay đổi thuộc tính của widget đã tạo.
+label.config(text="Xin chào!")
+label.config(fg="blue")
+Bài thực hành 3
+Hãy sửa chương trình bài 2 để:
+1. Người dùng nhập tên vào Entry.
+2. Nhấn nút "Say Hello".
+3. Label hiển thị "Hello, Minh" ngay trong cửa sổ, thay vì Terminal.
+4. Nếu người dùng nhập tên khác, Label cập nhật theo tên mới.
+def say_hello():
+    name = entry.get()
+    label.config(text=f"Hello, {name}")
+
+Sử dụng Frame trong Tkinter
+Frame là khung chứa các widget, giúp bạn chia giao diện thành nhiều khu vực.
+header = tk.Frame(root, bg="lightblue")
+header.pack(side=tk.TOP, fill=tk.X)
+
+label = tk.Label(header, text="Welcome!")
+label.pack()
+tk.Frame(root) → Tạo khung bên trong cửa sổ.
+bg="lightblue" → Đặt màu nền.
+side=tk.TOP → Đặt khung phía trên.
+fill=tk.X → Kéo dài khung theo chiều ngang.
+tk.Label(header) → Đặt Label bên trong Frame, không phải trực tiếp trong root.
+
+Bài tập 5
+Hãy tạo cửa sổ 400x300 có hai Frame:
+1. header — nền "lightblue", nằm phía trên, chứa Label "My Application".
+2. body — nền "lightgray", chiếm không gian còn lại, chứa Button "Click Me".
+
+import tkinter as tk
+root =tk.Tk()
+root.title("My Application")
+root.geometry("400x300")
+
+header = tk.Frame(root, bg="lightblue")
+header.pack(side=tk.TOP, fill=tk.X)
+
+label= tk.Label(header, text="Welcome!") sai chứa Label "My Application" sua thay welcome
+label.pack()
+
+body = tk.Frame(root, bg="lightgray")
+body.pack(fill=tk.BOTH, expand=True)  expand de chiem ko gian con lai
+
+button= tk.Button(   Button nằm sai Frame
+    root,                sua root-> body
+    text="Click Me"
+)
+button.pack()
+root.mainloop()
+
+Hiểu rõ pack()
+side=tk.TOP 	Xếp phía trên
+side=tk.LEFT	Xếp bên trái
+side=tk.RIGHT	Xếp bên phải
+side=tk.BOTTOM	Xếp phía dưới
+
+Tạo hai Button trong body:
+- "Left" nằm bên trái.
+- "Right" nằm bên phải.
+btn_left = tk.Button(body, text="Left")
+btn_left.pack(side=tk.LEFT)
+
+btn_right = tk.Button(body, text = "Right")
+btn_right.pack(side=tk.RIGHT)
+
+Học grid() trong Tkinter
+Khác với pack(), grid() sắp xếp widget theo hàng và cột, giống một bảng.
+label = tk.Label(root, text="Name:")
+label.grid(row=0, column=0)
+
+entry = tk.Entry(root)
+entry.grid(row=0, column=1)
+⚠️ Không sử dụng pack() và grid() cùng lúc cho các widget có chung Frame cha. 
+Nhưng bạn có thể dùng pack() trong root và grid() trong body.
+Bài tập 7
+Tạo giao diện đăng nhập đơn giản bằng grid() gồm:
+1. Label "Username:" ở hàng 0, cột 0.
+2. Entry nhập tên ở hàng 0, cột 1.
+3. Label "Password:" ở hàng 1, cột 0.
+4. Entry nhập mật khẩu ở hàng 1, cột 1.
+5. Button "Login" ở hàng 2, cột 1.
+
+lbl_user = tk.Label(root, text="Username:")
+lbl_user.grid(row=0, column=0, padx=10, pady=10)
+entry_user = tk.Entry(root)
+entry_user.grid(row=0, column=1, padx=10, pady=10)
+
+lbl_password = tk.Label(root, text ="Password:")
+lbl_password.grid(row=1, column=0, padx=10,pady=10)
+entry_password= tk.Entry(root, show='*')
+entry_password.grid(row=1, column= 1, padx=10, pady=10)
+
+def login():
+    username= entry_user.get()
+    password= entry_password.get()
+
+    if username == "admin" and password == "123":
+        print("Login successful")
+    else:
+        print("Login failed") 
+
+btn_login= tk.Button(root, text ='Login', command =login)
+btn_login.grid(row=2, column=1, padx=10, pady=10)
+
+Hiển thị thông báo bằng messagebox
+from tkinter import messagebox
+Ba loại thông báo phổ biến
+messagebox.showinfo()	    Thông báo thông tin
+messagebox.showwarning()	Cảnh báo
+messagebox.showerror()	    Thông báo lỗi
+
+Sử dụng place() trong Tkinter
+place() dùng để đặt widget tại vị trí cụ thể bằng tọa độ.
+label = tk.Label(root, text="Hello")
+label.place(x=50, y=100)  Cách mép trái cửa sổ 50 pixel. Cách mép trên cửa sổ 100 pixel.
+ Hãy tạo cửa sổ 400x300 với:
+1. Label "Username:" tại x=50, y=50.
+2. Entry nhập tên tại x=150, y=50.
+3. Button "Submit" tại x=150, y=100.
+4. Khi nhấn Submit, Terminal in ra tên vừa nhập.
+lbl_user = tk.Label(root, text="Username:")
+lbl_user.place(x=50, y=50)
+entry_user = tk.Entry(root)
+entry_user.place(x=150, y=50)
+
+btn_submit = tk.Button(
+    root,
+    text= "Submit",
+    command = lambda name = entry_user.get() : print(name)  sai vi tao khi tao Button
+)   sua  command=lambda: print(entry_user.get()) khi nhan Button
+btn_submit.place(x=150, y=100)
+
+Sử dụng hình ảnh trong Tkinter
+Tkinter có lớp PhotoImage:
+image = tk.PhotoImage(file="background.png") 
+
+label = tk.Label(root, image=image)
+label.pack()
+
+PhotoImage() → Tải hình ảnh.
+image=image → Hiển thị hình trong Label.
+pack() → Đưa hình lên giao diện.
+Lưu ý: tk.PhotoImage hỗ trợ PNG và GIF, nhưng không hỗ trợ trực tiếp JPEG trong Tkinter thông thường.
+Bài tập 11
+1. Chuẩn bị một ảnh tên background.png trong thư mục chứa main.py.
+2. Tạo cửa sổ 500x400.
+3. Sử dụng PhotoImage() để đọc ảnh.
+4. Hiển thị ảnh bằng Label.
+5. Sử dụng place(x=0, y=0) để đặt ảnh ở góc trên bên trái.
