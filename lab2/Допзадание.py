@@ -46,5 +46,5 @@ if __name__ == "__main__":
         next(reader)  # Пропускаем заголовок
         books = list(reader)
 
-    unique_publishers(books)
-    #top_20_books(books)
+    #unique_publishers(books)
+    top_20_books(books)

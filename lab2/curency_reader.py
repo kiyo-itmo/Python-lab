@@ -2,9 +2,9 @@ import xml.dom.minidom as minidom
 
 #  Xu ly XML: dictionary NumCode - CharCode
 def show_currencies():
-    dom = minidom.parse('currency.xml')
+    dom = minidom.parse('currency.xml') # Функция для чтения и разбора XML-файла.
 
-    elements = dom.getElementsByTagName("Valute")
+    elements = dom.getElementsByTagName("Valute") #Получить все элементы с тегом «Valute».
 
     currencies = {}
 

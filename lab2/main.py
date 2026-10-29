@@ -72,10 +72,10 @@ if __name__ == "__main__":
         next(reader)  # Пропускаем заголовок
         books = list(reader)
     #task1
-    #count_titles(books)
+    count_titles(books)
     #task2
-    #search_by_author(books)
-    # #task3
+    search_by_author(books)
+    #task3
     write_references(books)
 
     
