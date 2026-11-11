@@ -18,7 +18,8 @@ def top_20_books(books):
     book_list = []
 
     for row in books:
-        try:
+        #Преобразовать данные в целое число (int). Если данные некорректны, пропустить эту строку и продолжить цикл.
+        try: 
             downloads = int(row[5])
         except ValueError:
             continue
@@ -46,5 +47,5 @@ if __name__ == "__main__":
         next(reader)  # Пропускаем заголовок
         books = list(reader)
 
-    #unique_publishers(books)
+    unique_publishers(books)
     top_20_books(books)
