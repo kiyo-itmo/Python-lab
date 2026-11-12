@@ -2,30 +2,35 @@ import tkinter as tk
 import random
 import pygame
 
-# Task 3: Generator
 
-# Tinh trong so cua mot ky tu
+# Лабораторная работа №3
+# Вариант 4. Генератор ключей
+
+
+# Задание 3. Реализация генератора ключей
+
+# Определение весового коэффициента символа
 def get_weight(char):
     if char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-        return ord(char) - ord("A") + 1
+        return ord(char) - ord("A") + 1  # A=1, B=2, ...
     elif char in "0123456789":
         return int(char)
     else:
         return None
 
 
-# Tinh tong trong so cua mot block
+# Вычисление суммы весов символов блока
 def calculate_weight(block):
     total = 0
 
     for char in block:
         weight = get_weight(char)
-        total += weight
+        total += weight  # Cong don trong so
 
     return total
 
 
-# Tao mot block gom 4 ky tu
+# Генерация блока из четырёх символов
 def generate_block():
     characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
@@ -42,7 +47,7 @@ def generate_block():
             return block
 
 
-# Tao key gom 3 block
+# Генерация ключа из трёх блоков
 def generate_key():
     block1 = generate_block()
     block2 = generate_block()
@@ -53,13 +58,17 @@ def generate_key():
     return key
 
 
-# Hien thi key trong Entry
+# Отображение сгенерированного ключа
 def show_key():
     key = generate_key()
 
     entry_key.delete(0, tk.END)
     entry_key.insert(0, key)
 
+
+# Дополнительное задание. Музыка и анимация
+
+# Анимация заголовка
 def animate_title():
     if lbl_title.cget("fg") == "white":
         lbl_title.config(fg="yellow")
@@ -69,84 +78,79 @@ def animate_title():
     root.after(500, animate_title)
 
 
-root = tk.Tk()
-root.title("Game Key Generator")
-
-
-# Background music
-pygame.mixer.init()                 # khoi tao pygame mixer
-pygame.mixer.music.load("music.mp3") #doc file nhac
-pygame.mixer.music.set_volume(0.3) # dat am luong
-pygame.mixer.music.play(-1)         # phat nhac lap lai vo han
-
+# Остановка музыки при закрытии окна
 def on_close():
     pygame.mixer.music.stop()
     pygame.mixer.quit()
     root.destroy()
 
-root.protocol("WM_DELETE_WINDOW", on_close)
 
-# Task 1 + Task 2: GUI
-# Hinh nen
-bg_image = tk.PhotoImage(file="background.png").subsample(2, 2)  # Thu nho anh neu kich thuoc qua lon
 
-# Cho cua so co kich thuoc bang anh
-root.geometry(f"{bg_image.width()}x{bg_image.height()}")
+if __name__ == "__main__":
 
-# Tao Label chua anh nen
-bg_label = tk.Label(root, image=bg_image, bd=0)
-bg_label.grid(row=0, column=0, sticky="nsew")
+    root = tk.Tk()
+    root.title("Game Key Generator")
 
-# Cho phep root mo rong
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
+    # Фоновая музыка
+    pygame.mixer.init()
+    pygame.mixer.music.load("music.mp3")
+    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.music.play(-1)
 
-# Cau hinh grid ben trong bg_label
-bg_label.columnconfigure(0, weight=1)
-bg_label.rowconfigure(0, weight=1)
-bg_label.rowconfigure(4, weight=1)
+    root.protocol("WM_DELETE_WINDOW", on_close)
 
-# Title
-lbl_title = tk.Label(
-    bg_label,
-    text="GAME KEY GENERATOR",
-    font=("Arial", 20, "bold"),
-    fg="white",
-    bg="black"
-)
-lbl_title.grid(row=1, column=0, pady=15)
+    # Задание 1. Выбор игры и фонового изображения
 
-# Key
-entry_key = tk.Entry(
-    bg_label,
-    font=("Arial", 16),
-    width=25,
-    justify="center"
-)
-entry_key.grid(row=2, column=0, pady=15)
+    # Загрузка фонового изображения
+    bg_image = tk.PhotoImage(file="background.png").subsample(2, 2)
 
-# Button
-btn_generate = tk.Button(
-    bg_label,
-    text="GENERATE KEY",
-    font=("Arial", 14),
-    command=show_key
-)
-btn_generate.grid(row=3, column=0, pady=15)
+    # Размер окна
+    root.geometry(f"{bg_image.width()}x{bg_image.height()}")
 
-for i in range(10):
-    key = generate_key()
-    blocks = key.split("-")
+    bg_label = tk.Label(root, image=bg_image, bd=0)
+    bg_label.grid(row=0, column=0, sticky="nsew")
 
-    print("Key:", key)
+    # Задание 2. Создание графического интерфейса
 
-    for block in blocks:
-        total = calculate_weight(block)
-        print(block, total)
+    # Настройка сетки главного окна
+    root.columnconfigure(0, weight=1)
+    root.rowconfigure(0, weight=1)
 
-        assert 30 <= total <= 35
+    # Настройка сетки фонового изображения
+    bg_label.columnconfigure(0, weight=1)
+    bg_label.rowconfigure(0, weight=1)
+    bg_label.rowconfigure(4, weight=1)
 
-    print("-------------")
+    # Заголовок программы
+    lbl_title = tk.Label(
+        bg_label,
+        text="GAME KEY GENERATOR",
+        font=("Arial", 20, "bold"),
+        fg="white",
+        bg="black"
+    )
+    lbl_title.grid(row=1, column=0, pady=15)
 
-animate_title()
-root.mainloop()
+    # Поле для отображения ключа
+    entry_key = tk.Entry(
+        bg_label,
+        font=("Arial", 16),
+        width=25,
+        justify="center"
+    )
+    entry_key.grid(row=2, column=0, pady=15)
+
+    # Кнопка генерации ключа
+    btn_generate = tk.Button(
+        bg_label,
+        text="GENERATE KEY",
+        font=("Arial", 14),
+        command=show_key
+    )
+    btn_generate.grid(row=3, column=0, pady=15)
+
+    # Запуск анимации
+    animate_title()
+
+    # Запуск главного цикла программы
+    root.mainloop()
