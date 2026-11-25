@@ -102,7 +102,7 @@ if __name__ == "__main__":
     # Задание 1. Выбор игры и фонового изображения
 
     # Загрузка фонового изображения
-    bg_image = tk.PhotoImage(file="background.png").subsample(2, 2)
+    bg_image = tk.PhotoImage(file="background.png" ).subsample(2, 2)
 
     # Размер окна
     root.geometry(f"{bg_image.width()}x{bg_image.height()}")
@@ -152,5 +152,6 @@ if __name__ == "__main__":
     # Запуск анимации
     animate_title()
 
+    A , *B=[1, 2, 3]
     # Запуск главного цикла программы
     root.mainloop()

@@ -259,3 +259,34 @@ Bài tập 11
 3. Sử dụng PhotoImage() để đọc ảnh.
 4. Hiển thị ảnh bằng Label.
 5. Sử dụng place(x=0, y=0) để đặt ảnh ở góc trên bên trái.
+
+root.columnconfigure(0, weight=1)
+root	            Cửa sổ chính
+columnconfigure()	Cấu hình một cột trong grid()
+0	                Cột số 0
+weight=1	        Cho phép cột nhận thêm không gian khi cửa sổ lớn hơn
+
+Ví dụ:
+
+Khi cửa sổ có thêm 200 pixel chiều ngang:
+- weight=0: Cột không nhận thêm không gian dư.
+- weight=1: Cột có thể nhận thêm không gian dư.
+- weight=2: Nếu có cột khác với weight=1, cột này nhận lượng không gian dư gấp đôi cột đó.
+Lưu ý: weight=1 không có nghĩa là chiều rộng bằng 1 pixel.
+
+sticky="nsew" là gì?
+bg_label.grid(row=0, column=0, sticky="nsew")
+sticky quyết định cách widget nằm trong ô của grid()
+Một số cách sử dụng:
+Code	        Tác dụng
+sticky="w"	    Căn sang trái
+sticky="e"	    Căn sang phải
+sticky="n"	    Căn lên trên
+sticky="ew" 	Kéo giãn theo chiều ngang
+sticky="ns"	    Kéo giãn theo chiều dọc
+sticky="nsew"	Kéo giãn theo cả 4 hướng
+Ba dòng phối hợp với nhau:
+1. columnconfigure: Cho cột 0 nhận thêm chiều rộng.
+2. rowconfigure: Cho hàng 0 nhận thêm chiều cao.
+3. sticky="nsew": Cho bg_label lấp đầy ô lưới đã được mở rộng.
+Quan trọng: sticky="nsew" chỉ kéo giãn Label, không tự kéo giãn hình ảnh PNG bên trong.
