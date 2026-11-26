@@ -1,4 +1,3 @@
-
 # LAB 4 - Variant 4
 
 MAX_CELLS = 9
@@ -52,9 +51,9 @@ def gen_table_memo(items, max_cells=MAX_CELLS):
 
 # Tim cac vat pham duoc chon (Восстанавливаем выбранные предметы из таблицы)
 def find_selected(dp_table, items, max_cells):
-    item_codes = list(items.keys())
-    selected_items = []
-    cell_index = max_cells - 1
+    item_codes = list(items.keys())  
+    selected_items = []             #Список выбранных предметов
+    cell_index = max_cells - 1      # Начинаем с последнего столбца
 
     for item_index in range(len(item_codes) - 1, -1, -1):
         if cell_index < 0:
@@ -64,16 +63,16 @@ def find_selected(dp_table, items, max_cells):
             if dp_table[item_index][cell_index] > 0:
                 selected_items.append(item_codes[item_index])
 
-        elif dp_table[item_index][cell_index] != dp_table[item_index - 1][cell_index]:
+        elif dp_table[item_index][cell_index] != dp_table[item_index - 1][cell_index]:   #Если значение отличается от предыдущей строки, значит предмет был выбран
             item_code = item_codes[item_index]
             selected_items.append(item_code)
             cell_index -= items[item_code]['cells']
 
-    selected_items.reverse()
+    selected_items.reverse()  #Восстанавливаем исходный порядок предметов
     return selected_items
 
 
-# Tinh diem sinh ton
+# Tinh diem sinh ton (Вычисляем итоговые очки выживания)
 def calculate_score(selected_items):
     selected_points = sum(items[code]['points'] for code in selected_items)
     total_points = sum(item['points'] for item in items.values())
@@ -83,18 +82,19 @@ def calculate_score(selected_items):
     return final_score
 
 
-# Hien thi ba lo 3x3
+# Hien thi ba lo 3x3 (Выводим инвентарь в виде таблицы 3x3)
 def show_inventory(selected_items):
     inventory = []
 
+    #Каждый предмет занимает определённое количество ячеек
     for item_code in selected_items:
         item_cells = items[item_code]['cells']
         inventory.extend([item_code] * item_cells)
 
-    while len(inventory) < MAX_CELLS:
+    while len(inventory) < MAX_CELLS:  #Заполняем пустые ячейки символом '-'
         inventory.append('-')
 
-    for i in range(0, MAX_CELLS, 3):
+    for i in range(0, MAX_CELLS, 3):    #Выводим три строки по три ячейки
         print(','.join(f'[{code}]' for code in inventory[i:i + 3]))
 
 
